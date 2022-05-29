@@ -3,9 +3,15 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
-    required: [true, 'Please provide a valid name.'],
+    required: [true, 'Please provide a frist name.'],
+    maxlength: 50,
+    minlength: 3,
+  },
+  lastName: {
+    type: String,
+    required: [true, 'Please provide a last name.'],
     maxlength: 50,
     minlength: 3,
   },
@@ -18,11 +24,20 @@ const UserSchema = new mongoose.Schema({
     ],
     unique: true,
   },
+  userName: {
+    type: String,
+    required: [true, 'Please provide a valid username.'],
+    maxlength: 50,
+    minlength: 3,
+    unique: true,
+  },
   password: {
     type: String,
     required: [true, 'Please provide a valid password.'],
     minlength: 6,
   },
+}, {
+  timestamps: true
 })
 
 // Hash password before save

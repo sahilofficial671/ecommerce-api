@@ -15,6 +15,13 @@ const categorySchema = Schema({
     unique: true,
     slug: "title",
   },
+  description: {
+    type: String,
+    default: null,
+    required: false,
+  },
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model("Category", categorySchema);

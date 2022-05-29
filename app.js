@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const logger = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
 
 const authRouter = require('./routes/auth')
 const productsRouter = require('./routes/products')
@@ -18,8 +20,10 @@ app.set('trust proxy', 1);
 
 app.use([
   logger('dev'),
+  cors(),
+  helmet(),
   express.json(),
-  express.urlencoded({ extended: false })
+  express.urlencoded({ extended: false }),
 ])
 
 app.use('/api/v1/auth', authRouter)

@@ -1,7 +1,7 @@
 const Product = require('../models/Product')
 const { StatusCodes } = require('http-status-codes')
 
-const getAllProducts = async (req, res) => {
+const getProducts = async (req, res) => {
   const perPage = parseInt(req.query.perPage) || 8;
   const page = parseInt(req.query.page) || 1;
   let search = {};
@@ -53,7 +53,31 @@ const createProduct = async (req, res) => {
   res.json(product);
 };
 
+const getProduct = async (req, res) => {
+  const slug = req.params.slug;
+
+  try {
+    const product = await Product.findOne({
+      slug: slug
+    }).populate("category");
+
+    res.json({
+      status: "success",
+      product: product
+    });
+  } catch (error) {
+    console.log(error);
+
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({
+        message: "Something went wrong"
+      })
+  }
+};
+
 module.exports = {
-  getAllProducts,
-  createProduct
+  getProducts,
+  createProduct,
+  getProduct
 }

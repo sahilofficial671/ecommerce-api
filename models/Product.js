@@ -1,19 +1,28 @@
 var mongoose = require('mongoose');
 
+const slug = require("mongoose-slug-updater");
+
+mongoose.plugin(slug);
+
 var productSchema = mongoose.Schema({
-  imagePath: {
+  mainImagePath: {
     type: String,
     required: true,
   },
-  title: {
+  name: {
     type: String,
     required: true,
   },
   description: {
     type: String,
+    default: null,
     required: true,
   },
   price: {
+    type: Number,
+    required: true,
+  },
+  specialPrice: {
     type: Number,
     required: true,
   },
@@ -21,10 +30,17 @@ var productSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  slug: {
+    type: String,
+    unique: true,
+    slug: "name",
+  },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },
+}, {
+  timestamps: true
 });
 
 const Product = module.exports = mongoose.model('Product', productSchema);
