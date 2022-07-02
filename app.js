@@ -14,6 +14,7 @@ const categoryRouter = require('./routes/category')
 
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const notFoundMiddleware = require('./middlewares/not-found');
+const {versionUrlPrefix} = require('./core/version');
 
 // Middlewares
 app.set('trust proxy', 1);
@@ -23,12 +24,12 @@ app.use([
   cors(),
   helmet(),
   express.json(),
-  express.urlencoded({ extended: false }),
+  express.urlencoded({ extended: false })
 ])
 
-app.use('/api/v1/auth', authRouter)
-  .use('/api/v1/products', productsRouter)
-  .use('/api/v1/categories', categoryRouter)
+app.use(versionUrlPrefix + '/auth', authRouter)
+  .use(versionUrlPrefix + '/products', productsRouter)
+  .use(versionUrlPrefix + '/categories', categoryRouter)
 
 app.use([errorHandlerMiddleware, notFoundMiddleware]);
 
