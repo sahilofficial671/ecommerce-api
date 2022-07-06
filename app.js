@@ -1,14 +1,15 @@
 require('dotenv').config();
-require('express-async-errors');
 
 const express = require('express');
+require('express-async-errors');
+
 const app = express();
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const authRouter = require('./routes/auth')
+const authRouter = require('./routes/auth.route')
 const productsRouter = require('./routes/products')
 const categoryRouter = require('./routes/category')
 
