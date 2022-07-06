@@ -10,8 +10,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const authRouter = require('./routes/auth.route')
-const productsRouter = require('./routes/products')
-const categoryRouter = require('./routes/category')
+const productsRouter = require('./routes/products.route')
+const categoryRouter = require('./routes/category.route')
 
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const notFoundMiddleware = require('./middlewares/not-found');
