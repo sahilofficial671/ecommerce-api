@@ -1,7 +1,8 @@
-const Product = require('../models/Product')
+const Product = require('../../../models/Product')
 const { StatusCodes } = require('http-status-codes')
 
 const getProducts = async (req, res) => {
+  console.log('here');
   const perPage = parseInt(req.query.perPage) || 8;
   const page = parseInt(req.query.page) || 1;
   let search = {};
@@ -45,6 +46,8 @@ const getProducts = async (req, res) => {
         message: "Something went wrong"
       })
   }
+
+  return;
 };
 
 const createProduct = async (req, res) => {
@@ -54,6 +57,7 @@ const createProduct = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
+  console.log('here1 ');
   const slug = req.params.slug;
 
   try {
@@ -74,6 +78,8 @@ const getProduct = async (req, res) => {
         message: "Something went wrong"
       })
   }
+
+  return;
 };
 
 module.exports = {

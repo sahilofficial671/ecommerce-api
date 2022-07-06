@@ -9,13 +9,12 @@ const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const authRouter = require('./routes/auth.route')
-const productsRouter = require('./routes/products.route')
-const categoryRouter = require('./routes/category.route')
+// Routes
+const customerRouter = require('./domains/customer/routes/api.route')
 
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const notFoundMiddleware = require('./middlewares/not-found');
-const {versionUrlPrefix} = require('./core/version');
+const {versionUrlPrefix} = require('./config/version');
 
 // Middlewares
 app.set('trust proxy', 1);
@@ -28,9 +27,24 @@ app.use([
   express.urlencoded({ extended: false })
 ])
 
-app.use(versionUrlPrefix + '/auth', authRouter)
-  .use(versionUrlPrefix + '/products', productsRouter)
-  .use(versionUrlPrefix + '/categories', categoryRouter)
+app.use(versionUrlPrefix, customerRouter);
+
+// Debug routes
+// app._router.stack.forEach(function(r){
+//   console.log(r.__handle);
+//   if (r.__handle && r.__handle.stack && r.__handle.stack.length){
+//     console.log('child 1');
+//     r.__handle.stack.forEach(function(e){
+//       if (e.__handle && e.__handle.stack && e.__handle.stack.length){
+        
+//         console.log('child 2');
+//         e.__handle.stack.forEach(function(j){
+//           console.log(j);
+//         })
+//       }
+//     })
+//   }
+// })
 
 app.use([errorHandlerMiddleware, notFoundMiddleware]);
 

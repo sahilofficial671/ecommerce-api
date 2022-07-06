@@ -1,4 +1,4 @@
-const Category = require('../models/Category')
+const Category = require('../../../models/Category')
 const { StatusCodes } = require('http-status-codes')
 
 const getCategories = async (req, res) => {
