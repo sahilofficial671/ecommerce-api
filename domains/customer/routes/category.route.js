@@ -6,4 +6,4 @@ router
     .get('/', controller.getCategories)
     .post('/', controller.createCategory)
 
-module.exports = router.use('/category', router)
+module.exports = router
