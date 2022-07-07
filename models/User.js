@@ -56,4 +56,15 @@ UserSchema.methods.comparePassword = async function(canditatePassword) {
   return isMatch
 }
 
+UserSchema.methods.toAuthJson = function() {
+  return {
+    _id: this._id,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    userName: this.userName,
+    email: this.email,
+    token: this.createJWT()
+  }
+}
+
 module.exports = mongoose.model('User', UserSchema)

@@ -3,20 +3,12 @@ const { StatusCodes } = require('http-status-codes')
 
 const register = async (req, res) => {
   const user = await User.create({ ...req.body })
-  const token = user.createJWT()
 
   res
     .status(StatusCodes.CREATED)
     .json({
       status: "success",
-      user: {
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        userName: user.userName,
-        email: user.email,
-      },
-      token 
+      user: user.toAuthJson(),
     })
 }
 
@@ -49,20 +41,11 @@ const login = async (req, res) => {
       })
   }
 
-  const token = user.createJWT()
-
   res
     .status(StatusCodes.OK)
     .json({
       status: "success",
-      user: {
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        userName: user.userName,
-        email: user.email,
-      },
-      token 
+      user: user.toAuthJson()
     })
 }
 
