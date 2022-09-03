@@ -2,7 +2,6 @@ const Product = require('../../../models/Product')
 const { StatusCodes } = require('http-status-codes')
 
 const getProducts = async (req, res) => {
-  console.log('here');
   const perPage = parseInt(req.query.perPage) || 8;
   const page = parseInt(req.query.page) || 1;
   let search = {};

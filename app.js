@@ -14,7 +14,7 @@ const customerRouter = require('./domains/customer/routes/api.route')
 
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const notFoundMiddleware = require('./middlewares/not-found');
-const {versionUrlPrefix} = require('./config/version');
+const {versionUrlPrefix} = require('./config/api');
 
 // Middlewares
 app.set('trust proxy', 1);
