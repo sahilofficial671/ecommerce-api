@@ -56,7 +56,6 @@ const createProduct = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
-  console.log('here1 ');
   const slug = req.params.slug;
 
   try {
